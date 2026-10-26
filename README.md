@@ -2,7 +2,7 @@
 
 A PostgreSQL project exploring how an AI career-threat dataset describes automation risk, agentic AI exposure, salary ranges and trends, job categories, and recommended defense skills. The SQL script prepares and queries an existing PostgreSQL table, then builds a salary comparison table for further analysis.
 
-> **Interpretation:** The results describe the supplied dataset. The files do not identify its publisher, methodology, or provenance, so this project does not establish that the scores are independently validated measures of real-world job displacement.
+> **Interpretation:** The results describe the supplied dataset. 
 
 ## Project overview
 
@@ -113,7 +113,6 @@ CREATE TABLE public.ai_career_threat_index (
 - **Correlation is not causation.** Grouping risk labels alongside salaries or salary trends does not establish a causal relationship.
 - **The data source and collection method are unspecified** in the supplied files. Treat narrative insights and labels as dataset content, not verified forecasts.
 - **Quarterly comparisons use only 76 of 300 roles** with all five required score fields populated. They also compare two quarters in 2025 against three in 2026, as the SQL comments describe.
-- **One query has an `AND`/`OR` precedence issue.** The “sub-task automation > 60” query mixes `AND` and `OR` without parentheses. PostgreSQL evaluates `AND` before `OR`, so some returned rows may not satisfy the intended combination of automation score and risk labels. Add explicit parentheses around the intended risk conditions before treating that result as a reliable filtered list.
 - **The script changes and clears database state.** Its initial `TRUNCATE` deletes all rows in the target table, and its salary comparison table creation can fail if that table already exists. Use a disposable database or adjust the script for repeatable runs.
 
 ## Suggested repository structure
